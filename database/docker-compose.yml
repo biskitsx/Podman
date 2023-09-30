@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  api:
+    build: ./
+    ports:
+      - 8000:3000
+    environment:
+      - APP_NAME=API from Compose
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USERNAME=root
+      - DB_PASSWORD=password
+      - DB_DATABASE=dbkit
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: mariadb
+    environment:
+      - MARIADB_ROOT_PASSWORD=password
+      - MARIADB_DATABASE=dbkit
